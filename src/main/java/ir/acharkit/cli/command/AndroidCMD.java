@@ -1,6 +1,6 @@
 package ir.acharkit.cli.command;
 
-import ir.acharkit.cli.lib.FileHelper;
+import ir.acharkit.cli.lib.UnzipUtility;
 import ir.acharkit.cli.lib.WGet;
 
 public class AndroidCMD {
@@ -41,7 +41,7 @@ public class AndroidCMD {
         System.out.println("*** *** ***");
         boolean unzip;
         if (downloaded) {
-            unzip = FileHelper.unzip();
+            unzip = UnzipUtility.unzip();
             System.out.println(unzip ? "created new android project with clean architecture" : "create new project failed");
         } else {
             System.out.println("create new project failed");
