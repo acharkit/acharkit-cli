@@ -13,7 +13,7 @@ public class Commands {
 
     public static final String HELP = "help";
     public static final String VERSION = "version";
-    public static final String ANDROID_NEW_CLEAN = "create_new";
+    public static final String ANDROID_NEW_CLEAN = "create_new_-project";
     public static final String ANDROID = "android";
 
     private static Options options;
@@ -33,8 +33,9 @@ public class Commands {
 
         Option newAndroidClean = Option.builder("android")
                 .hasArg(true)
-                .numberOfArgs(2).argName("create new")
-                .desc("create new with clean architecture android project").build();
+                .optionalArg(true)
+                .numberOfArgs(4).argName("create new -project {{project-name}}")
+                .desc("create new android project with clean architecture ").build();
         options.addOption(newAndroidClean);
 
     }

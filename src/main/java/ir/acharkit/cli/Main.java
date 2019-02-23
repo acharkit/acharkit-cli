@@ -38,9 +38,10 @@ public class Main {
                     VersionCMD.getInstance().printVersion();
                     break;
                 case Commands.ANDROID:
-                    String value = String.join("_", cmd.getOptionValues(Commands.ANDROID));
+                    String[] options = cmd.getOptionValues(Commands.ANDROID);
+                    String value = String.join("_", options[0], options[1], options[2]);
                     if (value.equals(Commands.ANDROID_NEW_CLEAN))
-                        AndroidCMD.getInstance().printAndroidCreatedNew();
+                        AndroidCMD.getInstance().printAndroidCreatedNew(options[options.length - 1]);
                     break;
             }
         }

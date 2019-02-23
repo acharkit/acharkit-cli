@@ -12,7 +12,7 @@ public class ProgressHelper {
 
     public static void progressPercentage(int remain, int total) {
         if (remain > total) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("check network");
         }
         int maxBareSize = 10; // 10unit for 100%
         int remainProcent = ((100 * remain) / total) / maxBareSize;
@@ -35,5 +35,28 @@ public class ProgressHelper {
         String anim = "|/-\\";
         String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + percent + " %";
         System.out.write(data.getBytes());
+    }
+
+    public static void progressDotAround(int percent) throws IOException {
+        String anim = "⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽ ⣾";
+        String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + " ===========================";
+        System.out.write(data.getBytes());
+    }
+
+    public static void printProgBar(int percent) {
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < 50; i++) {
+            if (i < (percent / 2)) {
+                bar.append("=");
+            } else if (i == (percent / 2)) {
+                bar.append(">");
+            } else {
+                bar.append(" ");
+            }
+        }
+
+        bar.append("]   " + percent + "%     ");
+        System.out.print("\r" + bar.toString());
+
     }
 }

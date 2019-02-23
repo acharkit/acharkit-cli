@@ -30,13 +30,14 @@ public class WGet {
         int downloadedSize = 0;
         try {
             url = new URL(stringURL);
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(TIME_OUT_CONNECTION);
             connection.setConnectTimeout(TIME_OUT_CONNECTION);
             connection.setRequestMethod("GET");
             connection.connect();
 
-            float totalSize = connection.getContentLength();
+            float totalSize = connection.getContentLength() == -1.0 ? 100 : connection.getContentLength();
 
             File fileDownloadDir = new File(AndroidCMD.ANDROID_PROJECT_PATH + File.separator + "new-project" + "." + "zip");
 
@@ -53,14 +54,14 @@ public class WGet {
                 int percent = (int) (100.0f * (float) downloadedSize / totalSize);
                 if (previousPercent != percent) {
                     previousPercent = percent;
-                    ProgressHelper.progressPercentage(downloadedSize, (int) totalSize);
-
+                    ProgressHelper.progressDotAround(percent);
                 }
             }
             outputStream.flush();
             outputStream.close();
             inputStream.close();
             connection.disconnect();
+            System.out.print("\n");
             return true;
         } catch (IOException e) {
             System.out.println("Unexpected exception:" + e.getMessage());
