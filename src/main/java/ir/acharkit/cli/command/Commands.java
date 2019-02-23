@@ -1,6 +1,5 @@
-package ir.acharkit.cli;
+package ir.acharkit.cli.command;
 
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
@@ -14,7 +13,7 @@ public class Commands {
 
     public static final String HELP = "help";
     public static final String VERSION = "version";
-    public static final String ANDROID_NEW_CLEAN = "new_clean";
+    public static final String ANDROID_NEW_CLEAN = "create_new";
     public static final String ANDROID = "android";
 
     private static Options options;
@@ -22,26 +21,21 @@ public class Commands {
     public static void init() {
         options = new Options();
 
-        Option help = Option.builder()
-                .longOpt("help")
+        Option help = Option.builder("help")
                 .hasArg(false)
                 .desc("acharkit-cli help").build();
         options.addOption(help);
 
-
-        Option version = Option.builder()
-                .longOpt("version")
+        Option version = Option.builder("version")
                 .hasArg(false)
                 .desc("acharkit-cli version").build();
         options.addOption(version);
 
-        Option newAndroidClean = Option.builder()
-                .longOpt("android")
+        Option newAndroidClean = Option.builder("android")
                 .hasArg(true)
-                .numberOfArgs(2).argName("new clean")
-                .desc("create new clean android sample").build();
+                .numberOfArgs(2).argName("create new")
+                .desc("create new with clean architecture android project").build();
         options.addOption(newAndroidClean);
-
 
     }
 

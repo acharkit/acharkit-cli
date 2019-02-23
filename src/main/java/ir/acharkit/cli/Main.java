@@ -1,5 +1,9 @@
 package ir.acharkit.cli;
 
+import ir.acharkit.cli.command.AndroidCMD;
+import ir.acharkit.cli.command.Commands;
+import ir.acharkit.cli.command.HelpCMD;
+import ir.acharkit.cli.command.VersionCMD;
 import org.apache.commons.cli.*;
 
 public class Main {
@@ -11,38 +15,28 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(Commands.options(), args);
-
-
-            if (cmd.hasOption(Commands.HELP)) {
-                printHelp();
-            } else if (cmd.hasOption(Commands.VERSION)) {
-                printVersion();
-            } else if (cmd.hasOption(Commands.ANDROID)) {
-
-                String commaSeparatedValues = String.join("_", cmd.getOptionValues(Commands.ANDROID));
-                if (commaSeparatedValues.equals(Commands.ANDROID_NEW_CLEAN)) {
-                    printAndroidCreatedNew();
-                }
-            }
+            findCommand(cmd);
         } catch (ParseException e) {
             System.out.println("Unexpected exception:" + e.getMessage());
         }
-
-
     }
 
-
-    private static void printHelp() {
-        HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("acharkit-cli", Commands.options());
+    private static void findCommand(CommandLine cmd) {
+        for (Option option : cmd.getOptions()) {
+            String currentOpt = option.getOpt() == null ? option.getLongOpt() : option.getOpt();
+            switch (currentOpt) {
+                case Commands.HELP:
+                    HelpCMD.getInstance().printHelp();
+                    break;
+                case Commands.VERSION:
+                    VersionCMD.getInstance().printVersion();
+                    break;
+                case Commands.ANDROID:
+                    String value = String.join("_", cmd.getOptionValues(Commands.ANDROID));
+                    if (value.equals(Commands.ANDROID_NEW_CLEAN))
+                        AndroidCMD.getInstance().printAndroidCreatedNew();
+                    break;
+            }
+        }
     }
-
-    private static void printAndroidCreatedNew() {
-        System.out.println("created new android project with clean architecture");
-    }
-
-    private static void printVersion() {
-        System.out.println("acharkit cli version: ==> 0.0.1");
-    }
-
 }
