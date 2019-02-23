@@ -49,10 +49,11 @@ public class WGet {
                 downloadedSize += len;
 
                 int percent = (int) (100.0f * (float) downloadedSize / totalSize);
-                System.out.println(" Downloading " + percent + " % ");
-
                 if (previousPercent != percent) {
                     previousPercent = percent;
+                    String anim = "|/-\\";
+                    String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + percent + " %";
+                    System.out.write(data.getBytes());
                 }
             }
             outputStream.flush();

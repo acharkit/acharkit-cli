@@ -36,10 +36,10 @@ public class AndroidCMD {
 //    }
 //
     public void printAndroidCreatedNew() {
-        System.out.println("*** *** ***");
+        System.out.println("------------------------------");
         boolean downloaded = WGet.getInstance().get(GIT_CLEAN_REPO);
-        System.out.println("*** *** ***");
         boolean unzip;
+        System.out.println("\n");
         if (downloaded) {
             unzip = UnzipUtility.unzip();
             System.out.println(unzip ? "created new android project with clean architecture" : "create new project failed");
