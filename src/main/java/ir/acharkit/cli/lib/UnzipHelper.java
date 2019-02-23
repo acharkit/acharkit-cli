@@ -1,15 +1,23 @@
 package ir.acharkit.cli.lib;
 
+import ir.acharkit.cli.command.AndroidCMD;
+
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class UnzipUtility {
+/**
+ * Author:  Alireza Tizfahm Fard
+ * Date:    2019-02-23
+ * Email:   alirezat775@gmail.com
+ */
+
+public class UnzipHelper {
 
     private static final int BUFFER_SIZE = 4096;
 
-    public static boolean unzip() {
-        String distDirectory = new File("").getAbsolutePath();
+    public static boolean unzip(boolean deleteOrginal) {
+        String distDirectory = AndroidCMD.ANDROID_PROJECT_PATH;
         File zipFilePath = new File(distDirectory + File.separator + "new-project" + "." + "zip");
         File destDir = new File(distDirectory);
         if (!destDir.exists()) {
@@ -31,7 +39,8 @@ public class UnzipUtility {
                 entry = zipIn.getNextEntry();
             }
             zipIn.close();
-            return zipFilePath.delete();
+            if (deleteOrginal) return zipFilePath.delete();
+            else return true;
         } catch (IOException e) {
             System.out.println("Unexpected exception:" + e.getMessage());
             return false;

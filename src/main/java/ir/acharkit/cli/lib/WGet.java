@@ -1,5 +1,7 @@
 package ir.acharkit.cli.lib;
 
+import ir.acharkit.cli.command.AndroidCMD;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class WGet {
 
             float totalSize = connection.getContentLength();
 
-            File fileDownloadDir = new File(new File("").getAbsolutePath() + File.separator + "new-project" + "." + "zip");
+            File fileDownloadDir = new File(AndroidCMD.ANDROID_PROJECT_PATH + File.separator + "new-project" + "." + "zip");
 
             FileOutputStream outputStream = new FileOutputStream(fileDownloadDir);
             InputStream inputStream = connection.getInputStream();
@@ -51,9 +53,8 @@ public class WGet {
                 int percent = (int) (100.0f * (float) downloadedSize / totalSize);
                 if (previousPercent != percent) {
                     previousPercent = percent;
-                    String anim = "|/-\\";
-                    String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + percent + " %";
-                    System.out.write(data.getBytes());
+                    ProgressHelper.progressPercentage(downloadedSize, (int) totalSize);
+
                 }
             }
             outputStream.flush();

@@ -6,6 +6,12 @@ import ir.acharkit.cli.command.HelpCMD;
 import ir.acharkit.cli.command.VersionCMD;
 import org.apache.commons.cli.*;
 
+/**
+ * Author:  Alireza Tizfahm Fard
+ * Date:    2019-02-23
+ * Email:   alirezat775@gmail.com
+ */
+
 public class Main {
 
     public static void main(String[] args) {

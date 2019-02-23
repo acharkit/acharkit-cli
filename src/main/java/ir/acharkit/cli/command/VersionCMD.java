@@ -1,5 +1,11 @@
 package ir.acharkit.cli.command;
 
+/**
+ * Author:  Alireza Tizfahm Fard
+ * Date:    2019-02-23
+ * Email:   alirezat775@gmail.com
+ */
+
 public class VersionCMD {
 
     private static VersionCMD instance;
