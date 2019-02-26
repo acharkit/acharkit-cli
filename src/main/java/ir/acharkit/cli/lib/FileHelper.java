@@ -4,7 +4,7 @@ import java.io.*;
 
 public class FileHelper {
 
-    private static String readFile(String filename) {
+    public static String readFile(String filename) {
         String content = null;
         File file = new File(filename);
         FileReader reader = null;
@@ -28,7 +28,7 @@ public class FileHelper {
         return content;
     }
 
-    private void stringToFile(String text, String fileName) {
+    public static void stringToFile(String text, String fileName) {
         try {
             File file = new File(fileName);
             if (file.exists()) {

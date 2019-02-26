@@ -1,5 +1,6 @@
 package ir.acharkit.cli.command;
 
+import ir.acharkit.cli.lib.FileHelper;
 import ir.acharkit.cli.lib.UnzipHelper;
 import ir.acharkit.cli.lib.WGet;
 
@@ -57,11 +58,13 @@ public class AndroidCMD {
     }
 
     public void changePackageName(String packageName, String projectName, String destination) {
-        File file = new File(ANDROID_PROJECT_PATH, projectName);
-        if (file.exists()) {
-            System.out.println("Project with " + projectName + " not exist");
+        File file = new File(destination, projectName);
+        if (!file.exists()) {
+            System.out.println("Project not exist in " + file.getAbsolutePath());
         } else {
-
+            String gradleFile = destination + File.separator + projectName + File.separator + "app" + File.separator + "build.gradle";
+            String newGradleFile = FileHelper.readFile(gradleFile).replaceAll("applicationId \"ir.acharkit.android.sampleCleanArchitecture\"", "applicationId \"" + packageName + "\"");
+            FileHelper.stringToFile(newGradleFile, gradleFile);
         }
     }
 }
