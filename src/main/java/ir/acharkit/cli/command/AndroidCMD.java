@@ -16,6 +16,7 @@ public class AndroidCMD {
     public static final String ANDROID_PROJECT_NAME = "android-sample-clean-architecture-master";
     public static final String ANDROID_PROJECT_PATH = new File("").getAbsolutePath();
     public static final String GIT_CLEAN_REPO = "https://codeload.github.com/acharkit/android-sample-clean-architecture/zip/master";
+    public static final String CREATE = "create";
     private static AndroidCMD instance;
 
     private AndroidCMD() {
@@ -29,13 +30,13 @@ public class AndroidCMD {
         return instance;
     }
 
-    public void printAndroidCreatedNew(String optionValue) {
+    public void printAndroidCreatedNew(String projectName) {
         System.out.println("------------------------------------------------------------");
         boolean downloaded = WGet.getInstance().get(GIT_CLEAN_REPO);
         boolean unzip;
         if (downloaded) {
             unzip = UnzipHelper.unzip(true);
-            prepareProject(optionValue);
+            prepareProject(projectName);
             System.out.println(unzip ? "created new android project with clean architecture" : "create new project failed");
         } else {
             System.out.println("create new project failed");
@@ -43,10 +44,9 @@ public class AndroidCMD {
         System.out.println("------------------------------------------------------------");
     }
 
-    private void prepareProject(String optionValue) {
-        optionValue = optionValue.equals("new") ? "new-project" : optionValue;
+    private void prepareProject(String projectName) {
         File projectDir = new File(ANDROID_PROJECT_PATH + File.separator + ANDROID_PROJECT_NAME);
-        File projectNewDir = new File(ANDROID_PROJECT_PATH + File.separator + optionValue);
+        File projectNewDir = new File(ANDROID_PROJECT_PATH + File.separator + projectName);
         projectDir.renameTo(projectNewDir);
     }
 }

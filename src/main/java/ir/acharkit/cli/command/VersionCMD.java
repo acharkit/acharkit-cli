@@ -8,6 +8,8 @@ package ir.acharkit.cli.command;
 
 public class VersionCMD {
 
+    public static final String VERSION_CLI = "cli";
+    public static final String VERSION_ANDROID = "android";
     private static VersionCMD instance;
 
     private VersionCMD() {
@@ -21,8 +23,12 @@ public class VersionCMD {
         return instance;
     }
 
-    public void printVersion() {
-        System.out.println("acharkit cli version: ==> 0.0.1");
+    public void printAndroidVersion() {
+        System.out.println("Acharkit android version: ==> 0.1.1");
+    }
+
+    public void printCliVersion() {
+        System.out.println("Acharkit cli version: ==> 0.0.1");
     }
 
 }
