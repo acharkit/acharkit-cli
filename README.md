@@ -1,5 +1,7 @@
 # Acharkit CLI
 
+cli for management and create project
+
 ## 
 CLI for acharkit project
 

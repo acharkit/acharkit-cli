@@ -54,26 +54,8 @@ public class Main {
             }
         }
 
-
+        if (commands.getUseCase() != null) {
+            System.out.println("Command not exist (will enable in next version)");
+        }
     }
-//
-//    private static void findCommand(CommandLine cmd) {
-//        for (Option option : cmd.getOptions()) {
-//            String currentOpt = option.getOpt() == null ? option.getLongOpt() : option.getOpt();
-//            switch (currentOpt) {
-//                case Commands.HELP:
-//                    HelpCMD.getInstance().printHelp();
-//                    break;
-//                case Commands.VERSION:
-//                    VersionCMD.getInstance().printVersion();
-//                    break;
-//                case Commands.ANDROID:
-//                    String[] options = cmd.getOptionValues(Commands.ANDROID);
-//                    String value = String.join("_", options[0], options[1], options[2]);
-//                    if (value.equals(Commands.ANDROID_NEW_CLEAN))
-//                        AndroidCMD.getInstance().printAndroidCreatedNew(options[options.length - 1]);
-//                    break;
-//            }
-//        }
-//    }
 }

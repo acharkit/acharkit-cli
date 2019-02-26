@@ -39,7 +39,7 @@ public class ProgressHelper {
 
     public static void progressDotAround(int percent) throws IOException {
         String anim = "⣷ ⣯ ⣟ ⡿ ⢿ ⣻ ⣽ ⣾";
-        String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + " ===========================";
+        String data = "\r" + anim.charAt(percent % anim.length()) + " " + "loading " + " =================================";
         System.out.write(data.getBytes());
     }
 

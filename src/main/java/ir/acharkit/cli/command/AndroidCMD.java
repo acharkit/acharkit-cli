@@ -14,11 +14,11 @@ import java.io.File;
 
 public class AndroidCMD {
 
-    public static final String ANDROID_PROJECT_NAME = "android-sample-clean-architecture-master";
-    public static final String ANDROID_PROJECT_PATH = new File("").getAbsolutePath();
-    public static final String GIT_CLEAN_REPO = "https://codeload.github.com/acharkit/android-sample-clean-architecture/zip/master";
     public static final String CREATE = "create";
     public static final String CHANGE_PACKAGE = "changePackage";
+    private static final String ANDROID_PROJECT_NAME = "android-sample-clean-architecture-master";
+    private static final String ANDROID_PROJECT_PATH = new File("").getAbsolutePath();
+    private static final String GIT_CLEAN_REPO = "https://codeload.github.com/acharkit/android-sample-clean-architecture/zip/master";
     private static AndroidCMD instance;
 
     private AndroidCMD() {
@@ -65,7 +65,6 @@ public class AndroidCMD {
             String gradleFile = destination + File.separator + projectName + File.separator + "app" + File.separator + "build.gradle";
             String newGradleFile = FileHelper.readFile(gradleFile).replaceAll("ir.acharkit.android.sampleCleanArchitecture", packageName);
             FileHelper.stringToFile(newGradleFile, gradleFile);
-
             System.out.println("Change default package successfully");
         }
     }
