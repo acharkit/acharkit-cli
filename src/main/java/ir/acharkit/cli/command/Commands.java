@@ -15,16 +15,24 @@ public class Commands {
             description = "Displays help information")
     private boolean help;
     @Parameter(names = {"-v", "--version"},
-            description = "show current version {cli , android}")
+            description = "Show current version {cli , android}")
     private String version = "";
 
     @Parameter(names = {"-and", "--android"},
-            description = "commands for android {create , changePackage}")
+            description = "Commands for android {create , changePackage}")
     private String android = "";
 
     @Parameter(names = {"-prj", "--project"},
-            description = "commands for project {projectName}")
+            description = "Commands for project {projectName}")
     private String project = "";
+
+    @Parameter(names = {"-cpkg", "--changePackage"},
+            description = "Commands for change packageName {com.example.project}")
+    private String changePackage = "";
+
+    @Parameter(names = {"-d", "--destination"},
+            description = "Destination for project {~/Desktop/projects}")
+    private String destination = "";
 
     public boolean isHelp() {
         return help;
@@ -42,7 +50,16 @@ public class Commands {
         return project;
     }
 
-    //    public static final String HELP = "help";
+    public String getChangePackage() {
+        return changePackage;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+
+//    public static final String HELP = "help";
 //    public static final String VERSION = "version";
 //    public static final String ANDROID_NEW_CLEAN = "create_new_-project";
 //    public static final String ANDROID = "android";

@@ -1,7 +1,5 @@
 package ir.acharkit.cli.lib;
 
-import ir.acharkit.cli.command.AndroidCMD;
-
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -16,10 +14,9 @@ public class UnzipHelper {
 
     private static final int BUFFER_SIZE = 4096;
 
-    public static boolean unzip(boolean deleteOrginal) {
-        String distDirectory = AndroidCMD.ANDROID_PROJECT_PATH;
-        File zipFilePath = new File(distDirectory + File.separator + "new-project" + "." + "zip");
-        File destDir = new File(distDirectory);
+    public static boolean unzip(String destination, boolean deleteOriginal) {
+        File zipFilePath = new File(destination + File.separator + "new-project" + "." + "zip");
+        File destDir = new File(destination);
         if (!destDir.exists()) {
             destDir.mkdir();
         }
@@ -28,7 +25,7 @@ public class UnzipHelper {
             zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
             ZipEntry entry = zipIn.getNextEntry();
             while (entry != null) {
-                String filePath = distDirectory + File.separator + entry.getName();
+                String filePath = destination + File.separator + entry.getName();
                 if (!entry.isDirectory()) {
                     extractFile(zipIn, filePath);
                 } else {
@@ -39,10 +36,10 @@ public class UnzipHelper {
                 entry = zipIn.getNextEntry();
             }
             zipIn.close();
-            if (deleteOrginal) return zipFilePath.delete();
+            if (deleteOriginal) return zipFilePath.delete();
             else return true;
         } catch (IOException e) {
-            System.out.println("Unexpected exception:" + e.getMessage());
+            Logger.error(e.getMessage());
             return false;
         }
     }

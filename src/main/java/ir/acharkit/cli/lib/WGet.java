@@ -1,7 +1,5 @@
 package ir.acharkit.cli.lib;
 
-import ir.acharkit.cli.command.AndroidCMD;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +23,7 @@ public class WGet {
         return instance;
     }
 
-    public boolean get(String stringURL) {
+    public boolean get(String stringURL, String destination) {
         URL url = null;
         int downloadedSize = 0;
         try {
@@ -39,7 +37,7 @@ public class WGet {
 
             float totalSize = connection.getContentLength() == -1.0 ? 100 : connection.getContentLength();
 
-            File fileDownloadDir = new File(AndroidCMD.ANDROID_PROJECT_PATH + File.separator + "new-project" + "." + "zip");
+            File fileDownloadDir = new File(destination + File.separator + "new-project" + "." + "zip");
 
             FileOutputStream outputStream = new FileOutputStream(fileDownloadDir);
             InputStream inputStream = connection.getInputStream();
@@ -64,7 +62,7 @@ public class WGet {
             System.out.print("\n");
             return true;
         } catch (IOException e) {
-            System.out.println("Unexpected exception:" + e.getMessage());
+            Logger.error(e.getMessage());
             return false;
         }
     }

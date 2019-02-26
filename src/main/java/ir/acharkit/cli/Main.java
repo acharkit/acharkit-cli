@@ -5,6 +5,7 @@ import com.beust.jcommander.ParameterException;
 import ir.acharkit.cli.command.AndroidCMD;
 import ir.acharkit.cli.command.Commands;
 import ir.acharkit.cli.command.VersionCMD;
+import ir.acharkit.cli.lib.Logger;
 
 /**
  * Author:  Alireza Tizfahm Fard
@@ -23,7 +24,7 @@ public class Main {
         try {
             jCommander.parse(args);
         } catch (ParameterException exception) {
-            System.out.println("Unexpected exception:" + exception.getMessage());
+            Logger.error(exception.getMessage());
             jCommander.usage();
         }
         if (commands.isHelp()) {
@@ -41,9 +42,14 @@ public class Main {
         if (commands.getVersion().equals(VersionCMD.VERSION_CLI)) {
             VersionCMD.getInstance().printCliVersion();
         }
-
         if (commands.getAndroid().equals(AndroidCMD.CREATE)) {
-            AndroidCMD.getInstance().printAndroidCreatedNew(commands.getProject() == null ? "new-project" : commands.getProject());
+            AndroidCMD.getInstance().androidCreatedNew(commands.getProject() == null ? "new-project" : commands.getProject(), commands.getDestination());
+        }
+
+        if (commands.getAndroid().equals(AndroidCMD.CHANGE_PACKAGE)) {
+            if (commands.getChangePackage() != null && commands.getProject() != null) {
+                AndroidCMD.getInstance().changePackageName(commands.getChangePackage(), commands.getProject(), commands.getDestination());
+            }
         }
 
 
