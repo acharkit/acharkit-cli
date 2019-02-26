@@ -63,8 +63,11 @@ public class AndroidCMD {
             System.out.println("Project not exist in " + file.getAbsolutePath());
         } else {
             String gradleFile = destination + File.separator + projectName + File.separator + "app" + File.separator + "build.gradle";
-            String newGradleFile = FileHelper.readFile(gradleFile).replaceAll("applicationId \"ir.acharkit.android.sampleCleanArchitecture\"", "applicationId \"" + packageName + "\"");
+            String newGradleFile = FileHelper.readFile(gradleFile).replaceAll("ir.acharkit.android.sampleCleanArchitecture", packageName);
             FileHelper.stringToFile(newGradleFile, gradleFile);
+
+            System.out.println("Change default package successfully");
         }
     }
+
 }

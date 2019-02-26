@@ -22,7 +22,8 @@ CLI for acharkit project
  -cpkg, --changePackage
  
  Commands change packageName {com.example.project}
- 
+ just change default packageName
+  
 ### Project
  -prj, --project
  

@@ -49,6 +49,8 @@ public class Main {
         if (commands.getAndroid().equals(AndroidCMD.CHANGE_PACKAGE)) {
             if (commands.getChangePackage() != null && commands.getProject() != null) {
                 AndroidCMD.getInstance().changePackageName(commands.getChangePackage(), commands.getProject(), commands.getDestination());
+            } else {
+                System.out.println("Project not exist");
             }
         }
 
